@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+        .header { text-align: center; padding: 20px; background: #1e3c72; color: white; border-radius: 15px; margin-bottom: 30px; }
+        .admin-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+            gap: 20px; max-width: 900px; margin: auto; 
+        }
+        .admin-card {
+            background: white; padding: 25px 10px; border-radius: 20px;
+            text-align: center; text-decoration: none;
+            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #eee; display: flex; flex-direction: column; align-items: center;
+        }
+        .admin-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: #f8f9ff; }
+        .admin-card i { font-size: 40px; margin-bottom: 15px; color: #1e3c72; }
+        .admin-card span { font-weight: 600; color: #333; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1><i class="fas fa-user-shield"></i> Master Admin Dashboard</h1>
+    <p>Control Everything From Here</p>
+</div>
+
+<div class="admin-grid" id="btnContainer">
+    <p style="text-align:center; grid-column: 1/-1;">Loading Dashboard... ⏳</p>
+</div>
+
+<script>
+    // APNA APPS SCRIPT URL YAHAN DALEIN
+    const API_URL = "https://script.google.com/macros/s/AKfycbwIVeUc61bZPNE6uVdG4E46xkfOvoFDfTe4Ske6wNDiznn2GEhaq727y_UkzWPSYQNd/exec";
+
+    window.onload = function() {
+        fetch(API_URL)
+            .then(response => response.json())
+            .then(data => drawButtons(data))
+            .catch(err => {
+                document.getElementById('btnContainer').innerHTML = "Error loading data.";
+                console.error(err);
+            });
+    };
+
+    function drawButtons(btns) {
+        let container = document.getElementById('btnContainer');
+        if(!btns || btns.length === 0) {
+            container.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>No data found!</p>";
+            return;
+        }
+        
+        container.innerHTML = btns.map(b => `
+            <a href="${b.fullUrl}" class="admin-card">
+                <i class="${b.icon}"></i>
+                <span>${b.name}</span>
+            </a>
+        `).join('');
+    }
+</script>
+</body>
+</html>
