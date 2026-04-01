@@ -1,69 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Admin Panel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>SPS Result Portal</title>
     <style>
-        body { font-family: 'Poppins', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
-        .header { text-align: center; padding: 20px; background: #1e3c72; color: white; border-radius: 15px; margin-bottom: 30px; }
-        .admin-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-            gap: 20px; max-width: 900px; margin: auto; 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        .admin-card {
-            background: white; padding: 25px 10px; border-radius: 20px;
-            text-align: center; text-decoration: none;
-            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border: 1px solid #eee; display: flex; flex-direction: column; align-items: center;
+
+        .notice-board {
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 2px solid #2c3e50;
         }
-        .admin-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: #f8f9ff; }
-        .admin-card i { font-size: 40px; margin-bottom: 15px; color: #1e3c72; }
-        .admin-card span { font-weight: 600; color: #333; font-size: 14px; }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .marquee-container {
+            height: 200px; /* Is height ko aap badha ya ghata sakte hain */
+            padding: 10px 20px;
+        }
+
+        .result-link {
+            display: block;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #eef2f7;
+            color: #1a73e8;
+            text-decoration: none;
+            border-radius: 6px;
+            border-left: 5px solid #1a73e8;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .result-link:hover {
+            background: #1a73e8;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .new-tag {
+            background: red;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 8px;
+            vertical-align: middle;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1><i class="fas fa-user-shield"></i> Master Admin Dashboard</h1>
-    <p>Control Everything From Here</p>
-</div>
-
-<div class="admin-grid" id="btnContainer">
-    <p style="text-align:center; grid-column: 1/-1;">Loading Dashboard... ⏳</p>
-</div>
-
-<script>
-    // APNA APPS SCRIPT URL YAHAN DALEIN
-    const API_URL = "https://script.google.com/macros/s/AKfycbwIVeUc61bZPNE6uVdG4E46xkfOvoFDfTe4Ske6wNDiznn2GEhaq727y_UkzWPSYQNd/exec";
-
-    window.onload = function() {
-        fetch(API_URL)
-            .then(response => response.json())
-            .then(data => drawButtons(data))
-            .catch(err => {
-                document.getElementById('btnContainer').innerHTML = "Error loading data.";
-                console.error(err);
-            });
-    };
-
-    function drawButtons(btns) {
-        let container = document.getElementById('btnContainer');
-        if(!btns || btns.length === 0) {
-            container.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>No data found!</p>";
-            return;
-        }
+    <div class="notice-board">
+        <div class="header">Latest Updates / Results</div>
         
-        container.innerHTML = btns.map(b => `
-            <a href="${b.fullUrl}" class="admin-card">
-                <i class="${b.icon}"></i>
-                <span>${b.name}</span>
-            </a>
-        `).join('');
-    }
-</script>
+        <div class="marquee-container">
+            <marquee direction="up" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();">
+                
+                <a href="https://sagarpublicschool.github.io/result_sps/" target="_blank" class="result-link">
+                    <span class="new-tag">NEW</span> Click here to view the result of matric exam
+                </a>
+
+                <a href="http://google.com/" target="_blank" class="result-link">
+                    <span class="new-tag">NEW</span> Click here to view the result of inter11 exam
+                </a>
+
+                <a href="http://youtube.com/" target="_blank" class="result-link">
+                    <span class="new-tag">NEW</span> Click here to view the result of inter12 exam
+                </a>
+
+            </marquee>
+        </div>
+    </div>
+
 </body>
 </html>
