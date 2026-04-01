@@ -6,68 +6,99 @@
     <title>SPS Result Portal</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
             margin: 0;
+            background-color: #f7f9fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .notice-board {
+        /* 1. Top Header - Image 1.png Design */
+        .school-header {
+            width: 100%;
+            background: white;
+            border-bottom: 2px solid #ddd;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .main-title {
+            color: #b71c1c; /* Marron/Red for title */
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .address-line {
+            color: #2e7d32; /* Green for address */
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 10px 0 0;
+            letter-spacing: 0.5px;
+        }
+
+        /* 2. Notice Board Section - Image 0.png Design */
+        .notice-container {
             width: 90%;
             max-width: 500px;
+            margin-top: 30px; /* Space from header */
             background: white;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             overflow: hidden;
-            border: 2px solid #2c3e50;
+            border: 2px solid #37474f; /* Dark Blue border */
         }
 
-        .header {
-            background: #2c3e50;
+        .notice-header {
+            background: #37474f; /* Dark Blue/Black header */
             color: white;
             padding: 15px;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .marquee-container {
-            height: 200px; /* Is height ko aap badha ya ghata sakte hain */
-            padding: 10px 20px;
+        .marquee-box {
+            height: auto; /* Allow auto-height, adjust for scroll */
+            padding: 20px;
         }
 
+        /* Results Link - Image 0.png design */
         .result-link {
             display: block;
-            padding: 12px;
-            margin-bottom: 10px;
+            padding: 15px 12px;
+            margin-bottom: 15px;
             background: #eef2f7;
-            color: #1a73e8;
+            color: #1a73e8; /* Default text color */
             text-decoration: none;
-            border-radius: 6px;
-            border-left: 5px solid #1a73e8;
+            border-radius: 8px;
+            border-left: 5px solid #1a73e8; /* Left Blue line */
             font-weight: 500;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .result-link:hover {
             background: #1a73e8;
             color: white;
-            transform: translateX(5px);
+            transform: translateX(8px);
         }
 
-        .new-tag {
+        /* NEW blinking badge */
+        .new-badge {
             background: red;
             color: white;
             font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-right: 8px;
+            padding: 3px 8px;
+            border-radius: 5px;
+            margin-right: 12px;
+            font-weight: bold;
             vertical-align: middle;
-            animation: blink 1s infinite;
+            animation: blink 1.2s infinite;
         }
 
         @keyframes blink {
@@ -79,22 +110,27 @@
 </head>
 <body>
 
-    <div class="notice-board">
-        <div class="header">Latest Updates / Results</div>
+    <div class="school-header">
+        <h1 class="main-title">SAGAR PUBLIC SCHOOL</h1>
+        <p class="address-line">QUAZITOLA, BARSOI, KATIHAR, BIHAR 855102</p>
+    </div>
+
+    <div class="notice-container">
+        <div class="notice-header">LATEST UPDATES / RESULTS</div>
         
-        <div class="marquee-container">
-            <marquee direction="up" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();">
+        <div class="marquee-box">
+            <marquee direction="up" scrollamount="4" onmouseover="this.stop();" onmouseout="this.start();">
                 
                 <a href="https://sagarpublicschool.github.io/result_sps/" target="_blank" class="result-link">
-                    <span class="new-tag">NEW</span> Click here to view the result of Class 1 to 10
+                    <span class="new-badge">NEW</span> Click here to view the result of class 1 to 10
                 </a>
 
-                <a href="http://google.com/" target="_blank" class="result-link">
-                    <span class="new-tag">NEW</span> Click here to view the result of Nursery to UKG
+                <a href="https://sagarpublicschool.github.io/result11_sps/" target="_blank" class="result-link">
+                    <span class="new-badge">NEW</span> Click here to view the result of Nursery to UKG
                 </a>
 
-                <a href="http://youtube.com/" target="_blank" class="result-link">
-                    <span class="new-tag">NEW</span> Click here to view the result of Play School
+                <a href="https://sagarpublicschool.github.io/result12_sps/" target="_blank" class="result-link">
+                    <span class="new-badge">NEW</span> Click here to view the result of Play School
                 </a>
 
             </marquee>
